@@ -1,0 +1,84 @@
+
+
+/* basic styles */
+    .tablemagic {
+        position:relative;
+        margin:0 0 50px 0;
+    }
+
+    .tablemagic table {
+        width:100%;
+        border-collapse: collapse;
+        border: solid 1px gray;
+    }
+
+    .tablemagic table td,
+    .tablemagic table th {
+        padding:2px 4px;
+        border: solid 1px silver;
+    }
+
+    .tablemagic .frozen,
+    .tablemagic .scrollpane {
+        position:absolute;
+        overflow:hidden;
+    }
+
+    .tablemagic .scrollpane table {
+        position:absolute;
+        top:0;
+        left:0;
+    }
+
+/* styles for specific options - columns */
+    .tablemagic.columns .frozen {
+        top:0;
+        left:0;
+        height:100%;
+    }
+    .tablemagic.columns .scrollpane {
+        top:0;
+        right:0;
+        height:100%;
+    }
+
+/* styles for specific options - rows */
+
+    .tablemagic.rows .frozen {
+        left:0;
+        width:100%;
+    }
+
+    .tablemagic.rows .scrollpane {
+        left:0;
+        width:100%;
+        overflow:hidden;
+    }
+
+/* scrolling controls */
+
+    .tablemagic .scroll {
+        position:absolute;
+        background:silver;
+        cursor:pointer;
+        text-decoration:none;
+    }
+
+    .tablemagic .scroll.up {
+        top:0;
+        left:100%;
+    }
+    .tablemagic .scroll.down {
+        bottom:0;
+        left:100%;
+    }
+    .tablemagic .scroll.left {
+        top:100%;
+        left:0;
+    }
+    .tablemagic .scroll.right {
+        top:100%;
+        right:0;
+    }
+
+
