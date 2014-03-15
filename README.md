@@ -15,8 +15,8 @@ Usage
 
 * Include the stylesheet and the js file
 * Ensure jQuery is also loaded
-* Wrap your table in a div with a named class
-* On document ready, call ``$('.namedclass').tablemagic({ option: optionvalue });``
+* Wrap your table in a div with a class of tablemagic
+* On document ready, call ``$('.tablemagic').tablemagic({ option: optionvalue });``
 
 Options
 -------
