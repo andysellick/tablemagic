@@ -29,10 +29,14 @@ Options
 
 See example file for usage.
 
+RECENTLY ADDED
+--------------
+
+* Plugin is now responsive for column based tables.
+* Touch support now enabled for table scrolling.
+
 TODO
 ----
 
-* The plugin is currently not responsive.
-* I'd also like to add scrolling based on grab and drag as an option rather than little arrows to click on, or possibly some kind of custom scrollbars (to allow for things you might want to click on inside the table).
 * Combining both aspects of the plugin to be able to provide a fixed height table that scrolls both horizontally and vertically might be useful.
 
