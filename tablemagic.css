@@ -16,6 +16,8 @@
     .tablemagic table th {
         padding:2px 4px;
         border: solid 1px silver;
+        overflow-wrap:break-word;
+        word-wrap:break-word;
     }
 
     .tablemagic .frozen,
@@ -43,7 +45,6 @@
     }
 
 /* styles for specific options - rows */
-
     .tablemagic.rows .frozen {
         left:0;
         width:100%;
@@ -56,7 +57,6 @@
     }
 
 /* scrolling controls */
-
     .tablemagic .scroll {
         position:absolute;
         background:silver;
