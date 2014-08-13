@@ -207,7 +207,7 @@
                 $table.find('tr').css('height',maxheight);
 
                 //now pull required cells out of original table
-                var $frozentable = $('<table/>');
+                var $frozentable = $('<table/>').addClass($table.attr('class')); //preserve original table classes
                 var count = settings.freezeitems;
 
                 $table.find('tr').each(function(){
