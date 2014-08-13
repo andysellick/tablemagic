@@ -127,6 +127,7 @@
 
         //perform scrolling for touch
         $('.tablemagic').on('touchmove','.scrollpane',function(e){
+            e.stopPropagation();
             var touched = $(e.target).closest('.tablemagic');
             var currentX = e.originalEvent.touches ? e.originalEvent.touches[0].pageX : e.pageX;
             var currentY = e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY;
@@ -137,20 +138,18 @@
             scrolltableh = $scrolltable.outerHeight();
             scrollpanew = touched.find('.scrollpane').outerWidth();
             scrollpaneh = touched.find('.scrollpane').outerHeight();
-
+            
             if(touched.hasClass('columns')){
                 if (currentX > lastX + 10) { //moving right
                     e.preventDefault(); //preventDefault is only called in specific places to prevent disabling of scroll
                     scrollby = p.left + (currentX - lastX);
-                    if(scrollby > 0) scrollby = 0;
+                    if(scrollby > 0) scrollby = 0; //check not too far right
                     $scrolltable.css('left',scrollby + 'px');
                 }
                 if (currentX < lastX - 10) { //moving left
                     e.preventDefault();
                     scrollby = p.left - (lastX - currentX);
-                    if(scrolltablew + scrollby < scrollpanew) {
-                        scrollby = -(scrolltablew - scrollpanew);
-                    }
+                    if(scrolltablew + scrollby < scrollpanew) scrollby = -(scrolltablew - scrollpanew); //check not too far left
                     $scrolltable.css('left',scrollby + 'px');
                 }
             }
@@ -206,15 +205,12 @@
                 });
                 $table.find('tr').css('height',maxheight);
 
-                //now pull required cells out of original table
-                var $frozentable = $('<table/>').addClass($table.attr('class')); //preserve original table classes
-                var count = settings.freezeitems;
-
-                $table.find('tr').each(function(){
-                    var $col = $('<tr/>').css('height',maxheight);
-                    $col.append($(this).find('td,th').slice(0, settings.freezeitems));
-                    $frozentable.append($col);
+                //now pull required cells out of original table. We do it this way to preserve exactly the original html, including thead and tbody, as this may impact table styling
+                var $frozentable = $('<table/>').html($table.html());
+                $frozentable.find('tr').each(function(){
+                    $(this).find('th,td').slice(settings.freezeitems).remove(); //remove everything after the first n cells as determined in the settings
                 });
+                $frozentable.addClass($table.attr('class')); //preserve original table classes
 
                 //create panel that will be 'fixed' and fill with extracted cells
                 $frozenpane = $('<div/>').addClass('frozen');
@@ -224,6 +220,9 @@
                 //create scrolling panel and fill with remainder of table
                 scrollpanewidth = $parent.outerWidth() - $frozentable.width(); //for some reason outerWidth on frozentable miscalculates width
                 $scrollpane = $('<div/>').addClass('scrollpane').css('width',scrollpanewidth);
+                $table.find('tr').each(function(){
+                    $(this).find('th,td').slice(0,settings.freezeitems).remove();
+                });
                 $scrollpane.append($table);
                 $parent.append($scrollpane);
                 fixParentHeight($parent,$table); //need to call this after this kind of table
